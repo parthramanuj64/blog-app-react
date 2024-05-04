@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Select, RTE } from "../index";
+import { Button, Select, RTE, InputField } from "../index";
 import service from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ function PostForm({ post }) {
     });
 
   const navigate = useNavigate();
-  const userData = useSelector((state) => state.user.userData);
+  // const userData = useSelector((state) => state.user.userData);
 
   const submit = async (data) => {
     if (post) {
@@ -74,15 +74,18 @@ function PostForm({ post }) {
     };
   }, [watch, slugTransform, setValue]);
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="flex flex-col justify-center items-center"
+    >
       <div className="w-2/3 px-2">
-        <Input
+        <InputField
           label="Title :"
           placeholder="Title"
           className="mb-4"
           {...register("title", { required: true })}
         />
-        <Input
+        <InputField
           label="Slug :"
           placeholder="Slug"
           className="mb-4"
@@ -94,14 +97,13 @@ function PostForm({ post }) {
           }}
         />
         <RTE
-          label="Content :"
           name="content"
           control={control}
           defaultValue={getValues("content")}
         />
       </div>
-      <div className="w-1/3 px-2">
-        <Input
+      <div className="w-1/3 px-2 mt-4">
+        <InputField
           label="Featured Image :"
           type="file"
           className="mb-4"
@@ -126,7 +128,7 @@ function PostForm({ post }) {
         <Button
           type="submit"
           bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
+          className="w-full mb-4"
         >
           {post ? "Update" : "Submit"}
         </Button>

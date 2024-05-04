@@ -15,6 +15,7 @@ function App() {
       .getCurrentuser()
       .then((userData) => {
         if (userData) {
+          console.log("UserData : ", userData);
           dispatch(login({ userData }));
         } else {
           dispatch(logout());
@@ -32,7 +33,7 @@ function App() {
         <main>
           <Outlet />
         </main>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   ) : (
